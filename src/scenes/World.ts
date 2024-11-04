@@ -34,10 +34,11 @@ export class World extends Phaser.Scene {
     }
 
     this.userManager = new UserManager(this);
+    this.physics.world.setBounds(0, 0, this.scale.width, this.scale.height);
 
     // Create some initial users
     this.userManager.addUser("John", "bird", 100, 100);
-    this.userManager.addUser("Jane", "pig", 130, 100);
+    this.userManager.addUser("Jane", "pig", 150, 100);
   }
 
   update() {

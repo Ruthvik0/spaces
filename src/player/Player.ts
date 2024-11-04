@@ -64,12 +64,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         animationPrefix + (cursors.shift.isDown ? "run" : "walk"),
         true
       );
-    } else if (cursors.space.isDown) {
-      this.play(animationPrefix + "kick", true);
     } else {
       this.play(animationPrefix + "idle", true);
     }
 
+    // Update the username text position to follow the player
     this.usernameText.setPosition(this.x, this.y - 50);
   }
 }

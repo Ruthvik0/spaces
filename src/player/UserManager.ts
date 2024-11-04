@@ -11,6 +11,7 @@ export class UserManager {
   addUser(username: string, characterName: string, x: number, y: number) {
     this.createPlayerAnimations(username, characterName);
     const player = new Player(this.scene, x, y, characterName, username);
+
     this.users.set(username, player);
     return player;
   }
@@ -28,20 +29,16 @@ export class UserManager {
     this.users.forEach((player) => player.update(cursors));
   }
 
-  // Method to create animations for a specific player
   private createPlayerAnimations(username: string, characterName: string) {
     const animationsConfig = [
       { key: "walk", start: 6, end: 11 },
       { key: "idle", start: 0, end: 3 },
-      { key: "hurt", start: 12, end: 15 },
-      { key: "kick", start: 18, end: 20 },
       { key: "run", start: 30, end: 35 },
     ];
 
     animationsConfig.forEach((config) => {
       const animationKey = `${username}_${characterName}_${config.key}`;
       if (!this.scene.anims.exists(animationKey)) {
-        // Avoid duplicate animations
         this.scene.anims.create({
           key: animationKey,
           frames: this.scene.anims.generateFrameNumbers(characterName, {
@@ -55,9 +52,8 @@ export class UserManager {
     });
   }
 
-  // Method to remove animations for a specific player
   private removePlayerAnimations(username: string, characterName: string) {
-    const animationKeys = ["walk", "idle", "hurt", "kick", "run"];
+    const animationKeys = ["walk", "idle", "run"];
     animationKeys.forEach((key) => {
       const animationKey = `${username}_${characterName}_${key}`;
       if (this.scene.anims.exists(animationKey)) {
